@@ -5,6 +5,8 @@ const DespesasSchema = new mongoose.Schema({
     fixa: {type: Boolean, required: true},
     parcelas: {type: Number},
     idUsuario: {type: mongoose.Schema.Types.Array, ref:"Usuarios", required: true}
+}, {
+    versionKey: false,
 });
 
 const despesas = mongoose.model('Despesas', DespesasSchema);

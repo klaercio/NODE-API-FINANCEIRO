@@ -3,6 +3,8 @@ import despesasController from '../controllers/despesasController.js';
 
 const DespesasRoutes = express.Router();
 
-DespesasRoutes.get("/despesas", despesasController.getDespesas);
+DespesasRoutes
+    .get("/despesas", despesasController.getDespesas)
+    .post("/despesas", despesasController.postDespesas)
 
 export default DespesasRoutes;
