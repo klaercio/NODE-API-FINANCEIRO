@@ -6,5 +6,6 @@ const UsuariosRoutes = express.Router();
 UsuariosRoutes
     .get("/usuarios", usuariosController.getUsuarios)
     .post("/usuarios", usuariosController.postUsuarios)
+    .delete("/usuario/:id", usuariosController.deleteUsuarios)
 
 export default UsuariosRoutes;

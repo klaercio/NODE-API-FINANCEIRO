@@ -19,6 +19,17 @@ class DespesasController {
             res.status(500).send(`${err} - Erro na criação da despesa`);
         }
     }
+
+    static deleteDespesas = async (req, res) => {
+        const {id} = req.params;
+
+        try {
+            await despesas.findByIdAndDelete(id);
+            res.status(201).send("Despensa exlcuída com sucesso");
+        }catch(err) {
+            res.status(400).send(`${err} - Erro na exclusão do usuário`);
+        }
+    }
 }
 
 export default DespesasController;
