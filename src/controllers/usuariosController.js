@@ -10,6 +10,17 @@ class UsuariosController {
         }
     }
 
+    static getUsuariosById = async (req, res) => {
+        const {id} =  req.params;
+
+        try {
+            const usuariosResultado = await usuarios.findById(id);
+            res.status(200).send(usuariosResultado.toJSON());
+        }catch(err) {
+            res.status(500).send({message: 'Erro na busca pelo usuário'})
+        }
+    }
+
     static postUsuarios = async (req, res) => {
         const usuario = new usuarios(req.body)
         
@@ -18,6 +29,18 @@ class UsuariosController {
             res.status(200).send(usuario.toJSON());
         }catch(err) {
             res.status(500).send(`${err} - Erro na criação do usuário`)
+        }
+    }
+
+    static putUsuarios = async (req, res) => {
+        const {id} = req.params;
+
+        try {
+            await usuarios.findByIdAndUpdate(id, {$set: req.body});
+            console.log(usuarios[id]);
+            res.status(200).send({message: `${id} - Editado com sucesso!`})
+        } catch(err) {
+            res.status(500).send({message: `${err} - Erro na edição do usuário`})
         }
     }
 

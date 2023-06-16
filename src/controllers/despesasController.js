@@ -10,6 +10,17 @@ class DespesasController {
         }
     }
 
+    static getDespesasById = async (req, res) => {
+        const {id} =  req.params;
+
+        try {
+            const despesasResultado = await despesas.findById(id);
+            res.status(200).send(despesasResultado.toJSON());
+        }catch(err) {
+            res.status(500).send({message: `${err} - Erro na busca pela despesa`})
+        }
+    }
+
     static postDespesas = async (req, res) => {
         const despesa = new despesas(req.body);
         try {
@@ -17,6 +28,17 @@ class DespesasController {
             res.status(200).send(despesa.toJSON());
         }catch(err) {
             res.status(500).send(`${err} - Erro na criação da despesa`);
+        }
+    }
+
+    static putDespesas = async (req, res) => {
+        const {id} = req.params;
+
+        try {
+            await despesas.findByIdAndUpdate(id, {$set: req.body});
+            res.status(200).send({message: `${id} - Editado com sucesso!`})
+        } catch(err) {
+            res.status(500).send({message: `${err} - Erro na edição da despesa`})
         }
     }
 

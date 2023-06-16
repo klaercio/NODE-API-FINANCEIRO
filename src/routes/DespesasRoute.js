@@ -5,7 +5,9 @@ const DespesasRoutes = express.Router();
 
 DespesasRoutes
     .get("/despesas", despesasController.getDespesas)
+    .get("/despesas/:id", despesasController.getDespesasById)
     .post("/despesas", despesasController.postDespesas)
-    .delete("/despesa/:id", despesasController.deleteDespesas)
+    .put("/despesas/:id", despesasController.putDespesas)
+    .delete("/despesas/:id", despesasController.deleteDespesas)
 
 export default DespesasRoutes;
