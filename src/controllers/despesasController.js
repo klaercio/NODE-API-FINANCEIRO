@@ -21,11 +21,22 @@ class DespesasController {
         }
     }
 
+    static getDespesasByIdUsuario = async (req, res) => {
+        const idUsuario = req.query.idUsuario;
+        
+        try {
+            const despesasResultado = await despesas.find({"idUsuario": idUsuario}).populate('idUsuario');
+            res.status(200).json(despesasResultado);
+        }catch(err) {
+            res.status(500).send({message: `${err} - Erro na busca pela despesa`})
+        }
+    }
+
     static postDespesas = async (req, res) => {
         const despesa = new despesas(req.body);
         try {
             await despesa.save();
-            res.status(200).send(despesa.toJSON());
+            res.status(201).send(despesa.toJSON());
         }catch(err) {
             res.status(500).send(`${err} - Erro na criação da despesa`);
         }
@@ -47,7 +58,7 @@ class DespesasController {
 
         try {
             await despesas.findByIdAndDelete(id);
-            res.status(201).send("Despensa exlcuída com sucesso");
+            res.status(200).send("Despesa exlcuída com sucesso");
         }catch(err) {
             res.status(400).send(`${err} - Erro na exclusão do usuário`);
         }

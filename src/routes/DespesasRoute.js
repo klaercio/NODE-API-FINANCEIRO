@@ -5,6 +5,7 @@ const DespesasRoutes = express.Router();
 
 DespesasRoutes
     .get("/despesas", despesasController.getDespesas)
+    .get("/despesas/busca", despesasController.getDespesasByIdUsuario)
     .get("/despesas/:id", despesasController.getDespesasById)
     .post("/despesas", despesasController.postDespesas)
     .put("/despesas/:id", despesasController.putDespesas)

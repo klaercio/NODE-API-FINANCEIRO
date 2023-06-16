@@ -26,7 +26,7 @@ class UsuariosController {
         
         try {
             await usuario.save();
-            res.status(200).send(usuario.toJSON());
+            res.status(201).send(usuario.toJSON());
         }catch(err) {
             res.status(500).send(`${err} - Erro na criação do usuário`)
         }
@@ -49,7 +49,7 @@ class UsuariosController {
         
         try { 
             await usuarios.findByIdAndDelete(id);
-            res.status(201).send(`${id} - Usuário excluído com sucesso!!!`)
+            res.status(200).send(`${id} - Usuário excluído com sucesso!!!`)
         }catch(err) {
             res.status(400).send(`${err} - Id Inválido`);
         }
